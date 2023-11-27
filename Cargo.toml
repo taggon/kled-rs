@@ -1,0 +1,15 @@
+[package]
+name = "kled-rs"
+version = "0.1.0"
+edition = "2021"
+description = """Fuzzy Matching Library with Levenshtein Edit Distance, Tailored for Korean Language Support"""
+authors = ["Taegon Kim <gonom9@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+categories = ["text-processing"]
+keywords = ["fuzzy", "levenshtein", "korean"]
+repository = "https://github.com/taggon/kled-rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
