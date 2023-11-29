@@ -27,8 +27,12 @@ pub fn is_similar(c1: &char, c2: &char) -> bool {
     if is_consonant(c1) || is_consonant(c2) {
         let cc1 = get_consonant(c1);
         let cc2 = get_consonant(c2);
-        return cc1 == cc2;
-        // return get_consonant(c1) == get_consonant(c2);
+
+        if (cc1 == None) || (cc2 == None) {
+            return false;
+        }
+
+        return cc1.unwrap() == cc2.unwrap();
     }
 
     return omit_final(c1) == omit_final(c2);
@@ -57,7 +61,7 @@ fn omit_final(c: &char) -> char {
 }
 
 /// Get the first consonant of a Korean letter.
-fn get_consonant(c: &char) -> char {
+fn get_consonant(c: &char) -> Option<char> {
     let consonant_syllables = [
         ('ㄱ', '가'),
         ('ㄲ', '까'),
@@ -81,7 +85,7 @@ fn get_consonant(c: &char) -> char {
     ];
 
     if !is_syllable(c) {
-        return c.clone();
+        return Some(c.clone());
     }
 
     let without_final = (((c.clone() as u32) - 0xac00) / 588) * 588 + 0xac00;
@@ -89,11 +93,11 @@ fn get_consonant(c: &char) -> char {
 
     for (_, (con, syl)) in consonant_syllables.iter().enumerate() {
         if *syl == syllable {
-            return *con;
+            return Some(*con);
         }
     }
 
-    return '\u{0000}';
+    return None;
 }
 
 #[cfg(test)]
